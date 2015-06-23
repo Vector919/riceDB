@@ -94,14 +94,16 @@ class Installer(object):
     def get_active_rice(program_name):
         """
         Gets the active (in use) rice for
-        a given program
+        a given program, returns None
+        if it cannot be determine or there is no
+        active rice
         """
         program_path = util.RDBDIR + program_name + '/'
         try:
             os.chdir(program_path)
+            return open('./.active').readline().rstrip()
         except OSError:
             return
-        return open('./.active').readline().rstrip()
 
     def switch_out(self):
         """
